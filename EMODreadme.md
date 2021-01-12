@@ -6,11 +6,11 @@ We release the code of our paper.
 We propose a novel Attention-Relation (AR) module to explore joint Attention-Relation in CNNs for marine organism detection. We then design an Efficient Marine Organism Detector (EMOD) for high-resolution marine video surveillance to detect organisms and surveil marine environments in a real-time and fast fashion.
 
 <div align="center">
-  <img src="./EMOD framework.jpg" height="360px"/> 
+  <img src="./EMOD framework.jpg" height="460px"/> 
 </div>
 
 <div align="center">
-  <img src="./AR-method.png" height="360px"/>
+  <img src="./AR-method.png" height="340px"/>
 </div>
 
 This code is based on the [mmdetection](https://github.com/open-mmlab/mmdetection) codebase. 
