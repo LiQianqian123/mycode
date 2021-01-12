@@ -27,34 +27,41 @@ This code is based on the [mmdetection](https://github.com/open-mmlab/mmdetectio
 ## Datasets
 
 #### MOUSS, MBARI and HabCam
-- Download the dataset and annotations from [dataset provider](https://20bn.com/datasets/something-something). 
-- Download the *frame list* from the following links: ([train](https://drive.google.com/file/d/1GG9l8pNk1zBHqAlCGiNWbCqbcCdqwuQt/view?usp=sharing), [val](https://drive.google.com/file/d/1cNNnagoWqzo3GP30gOz0kFS49NqaO8Kh/view?usp=sharing)).
-- Add prefix "folder_0" and rename all frame files, for example: 1/00001.jpg => 1/1_000001.jpg, 999/00001.jpg => 999/999_000001.jpg
-- Put all annotation json files and the frame lists in the same folder, and set `DATA.PATH_TO_DATA_DIR` to the path. Set `DATA.PATH_PREFIX` to be the path to the folder containing extracted frames.
+- Download the dataset and annotations from [dataset provider](https://www.viametoolkit.org/). 
+- Put all annotation json files in the same folder, and set `ann_file` to the path. Set `img_prefix` to be the path to the folder containing data.
+- Make train and validation splits via [data/make_splits.py](data/make_splits.py)
 
 ## Running
 
-- To train and test a CoTeRe-ResNet-18 model from scratch on Something-Something V1. You can build variant CoTeRe-Nets via setting COTERE.TYPE.
+- To train and test Faster-RCNN-ResNet50 from scratch on MOUSS0. You can run the scripts.
 
   ```
-  python tools/run_net.py \
-    --cfg configs/SSv1/R3D_18_COTERE_32x1.yaml \
-    DATA.PATH_TO_DATA_DIR path_to_frame_list \
-    DATA.PATH_PREFIX path_to_frames \
-    COTERE.TYPE CTSR
+  CUDA_VISIBLE_DEVICES=0,1 PORT=29500 ./tools/dist_train.sh configs/faster_rcnn/faster_rcnn_x101_fpn_mouss0_sp1.py 2
+  CUDA_VISIBLE_DEVICES=2,3 PORT=29501 ./tools/dist_train.sh configs/faster_rcnn/faster_rcnn_x101_fpn_mouss0_sp2.py 2
   ```
-  You can also set the variables (DATA_PATH, FRAME_PATH, COTERE_TYPE) in [scripts/run_ssv1_r3d_18_32x1.sh](scripts/run_ssv1_r3d_18_32x1.sh), and then run the script.
+  
+## Model Zoo
 
-  ```
-  bash scripts/run_ssv1_r3d_18_32x1.sh
-  ```
+### Pretrain models
 
-## Models
-We will provide the models and results later.
+#### Cascade R-CNN 
+
+Please refer to [Cascade R-CNN](https://github.com/open-mmlab/mmdetection/blob/master/configs/cascade_rcnn) for details.
+
+#### RetinaNet
+
+Please refer to [RetinaNet](https://github.com/open-mmlab/mmdetection/blob/master/configs/retinanet) for details.
+
+#### Faster R-CNN
+
+Please refer to [Faster R-CNN](https://github.com/open-mmlab/mmdetection/blob/master/configs/faster_rcnn) for details.
+
+### YOLOv3
+
+Please refer to [YOLOv3](https://github.com/open-mmlab/mmdetection/blob/master/configs/yolo) for details.
 
 ## Acknowledgement
 We really appreciate the contributors of following codebases.
 
-- [facebookresearch/SlowFast](https://github.com/facebookresearch/SlowFast)
-- [facebookresearch/VMZ](https://github.com/facebookresearch/VMZ)
-- [kenshohara/3D-ResNets-PyTorch](https://github.com/kenshohara/3D-ResNets-PyTorch)
+- [open-mmlab/mmdetection](https://github.com/open-mmlab/mmdetection)
+
